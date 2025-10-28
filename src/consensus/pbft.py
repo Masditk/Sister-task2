@@ -26,13 +26,10 @@ class PBFTConsensus:
             await self.broker_subscribe(self.node_id, self._on_message)
 
     async def _on_message(self, message):
-        # very small simulation: respond to pre-prepare with prepare, then commit
         content = message.content
         mtype = content.get("type")
         if mtype == "pre-prepare":
-            # broadcast prepare
             for p in self.peers:
                 await self.broker_send(
-                    type("M", (), {})()  # dummy Message-like object is not ideal but kept minimal
+                    type("M", (), {})()
                 )
-        # left as exercise to expand for full PBFT simulation
