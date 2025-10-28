@@ -1,4 +1,4 @@
-# Overview  
+# Introduction
 **Nama:** Dimas Ramadhani  
 **NIM:** 11231021  
 **Mata Kuliah:** Sistem Paralel dan Terdistribusi  
@@ -7,7 +7,7 @@
 
 ---
 
-# Deskripsi Singkat  
+## Deskripsi Singkat  
 **Distributed Sync System** merupakan sistem terdistribusi yang dibangun menggunakan **Raft Consensus Algorithm** sebagai fondasi koordinasi antar node. Sistem ini terdiri dari tiga jenis layanan utama:
 
 1. **Lock Node (Port 800x)** → Pengelola kunci terdistribusi berbasis Raft.  
@@ -18,7 +18,7 @@ Ketiga node ini berkomunikasi dan menjaga konsistensi melalui proses **leader el
 
 ---
 
-# Arsitektur Sistem  
+## Arsitektur Sistem  
 ![Arsitektur Sistem](Arsitektur.png)
 
 Semua node dibangun di atas modul inti **RaftNode**, yang menangani:
