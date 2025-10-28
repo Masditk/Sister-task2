@@ -19,7 +19,7 @@ Ketiga node ini berkomunikasi dan menjaga konsistensi melalui proses **leader el
 ---
 
 # Arsitektur Sistem  
-![Arsitektur Sistem](image.png)
+![Arsitektur Sistem](Arsitektur.png)
 
 Semua node dibangun di atas modul inti **RaftNode**, yang menangani:
 - Pemilihan pemimpin (Leader Election)  
