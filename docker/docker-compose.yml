@@ -193,17 +193,6 @@ services:
       - cache3:/data
     networks: [raft_net]
 
-volumes:
-  node1:
-  node2:
-  node3:
-  queue1:
-  queue2:
-  queue3:
-  cache1:
-  cache2:
-  cache3:
-
 networks:
   raft_net:
     driver: bridge
