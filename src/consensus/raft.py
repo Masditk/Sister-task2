@@ -13,7 +13,7 @@ class RaftNode:
         self.role = ROLE_FOLLOWER
         self.current_term = 0
         self.voted_for = None
-        self.log: List[Dict] = []  # [{term, entry:{type, data}}]
+        self.log: List[Dict] = []
         self.commit_index = -1
         self.last_applied = -1
         self.peers = [p for p in cfg.NODES.split(",") if not p.endswith(f":{cfg.HTTP_PORT}")]
@@ -119,7 +119,6 @@ class RaftNode:
             self.last_applied += 1
             await self.apply(self.log[self.last_applied]["entry"])
 
-# HTTP Handlers (mounted by base_node)
 async def request_vote(req):
     node: RaftNode = req.app["raft"]
     data = await req.json()
@@ -127,7 +126,7 @@ async def request_vote(req):
     if term > node.current_term:
         node.current_term = term; node.role = ROLE_FOLLOWER; node.voted_for=None
     vote = False
-    up_to_date = True  # simplified
+    up_to_date = True
     if (node.voted_for in (None, data["candidate_id"])) and up_to_date and term >= node.current_term:
         node.voted_for = data["candidate_id"]; node.reset_election_timer(); vote=True
     return web.json_response({"term": node.current_term, "vote_granted": vote})
@@ -138,7 +137,6 @@ async def append_entries(req):
     if data["term"] < node.current_term:
         return web.json_response({"success": False, "term": node.current_term})
     node.role = ROLE_FOLLOWER; node.reset_election_timer()
-    # naive log match: accept directly (demo)
     if data["entries"]:
         node.log.extend(data["entries"])
     if data.get("leader_commit", -1) > node.commit_index:
