@@ -1,0 +1,8 @@
+aiohttp
+uvloop
+aioredis
+pydantic
+prometheus-client
+pyyaml
+xxhash
+locust
