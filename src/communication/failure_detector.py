@@ -7,7 +7,7 @@ class FailureDetector:
         self.interval = interval
         self.timeout = timeout
         self.status = {p: {"alive": False, "last_seen": 0.0} for p in peers}
-        self.subscribers = []  # callback list untuk event node_down/up
+        self.subscribers = []
 
     def subscribe(self, callback):
         self.subscribers.append(callback)
