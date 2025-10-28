@@ -90,7 +90,7 @@ Invoke-WebRequest -Uri "http://localhost:8000/lock/release" -Method POST -Conten
 
 ## Enqueue
 ```powershell
-$body = '{"key":"user:42","value":"hello"}'
+$body = '{"key":"user:40","value":"Halo, Dunia"}'
 Invoke-WebRequest -Uri "http://localhost:8100/queue/enq" -Method POST -ContentType "application/json" -Body $body
 ```
 
@@ -98,17 +98,17 @@ Invoke-WebRequest -Uri "http://localhost:8100/queue/enq" -Method POST -ContentTy
 ```powershell
 Invoke-WebRequest -Uri "http://localhost:8100/queue/deq" -Method POST
 ```
+
 ## Ack Message
 ```powershell
-$ack = '{"msg_id":"1761617481398441049"}' 
+$ack = '{"msg_id":"{id_dequeue}"}' 
 Invoke-WebRequest -Uri "http://localhost:8100/queue/ack" -Method POST -ContentType "application/json" -Body $ack
 ```
 
 ## PUT Data
-
 ```powershell
 $body = @'
-{"key":"user:42","val":{"name":"Arya","score":99}}
+{"key":"user:42","val":{"name":"Masdimas","score":50}}
 '@
 Invoke-WebRequest -Uri "http://localhost:8200/cache/put" -Method POST -ContentType "application/json" -Body $body
 ```
