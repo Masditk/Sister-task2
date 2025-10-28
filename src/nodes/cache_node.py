@@ -42,7 +42,6 @@ class CacheNode(BaseNode):
         data = await req.json()
         if self.raft.role != 2:
             return web.json_response({"redirect": self.raft.leader_hint}, status=307)
-        # write: invalidate others then update
         ok1 = await self.raft.replicate_and_commit({"type":"CACHE_INV","key": data["key"]})
         ok2 = await self.raft.replicate_and_commit({"type":"CACHE_UPD","key": data["key"], "val": data["val"]})
         return web.json_response({"ok": ok1 and ok2})
